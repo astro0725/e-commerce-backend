@@ -6,10 +6,11 @@ let sequelize;
 
 if (process.env.NODE_ENV === 'production') {
     sequelize = new Sequelize(process.env.JAWSDB_URL, {
-        dialect: process.env.DB_DIALECT,
-        dialectOptions: {
-          decimalNumbers: true,
-        }
+      dialect: process.env.DB_DIALECT,
+      dialectOptions: {
+        decimalNumbers: true,
+      },
+      logging: true
     });
 } else {
     const config = envConfig; 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === 'production') {
       password: config.password,
       host: config.host,
       dialect: config.dialect,
+      logging: true
     });
 }
 
