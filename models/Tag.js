@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'tag',
   });
   Tag.associate = models => {
-    Tag.belongsToMany(models.Product, {
-      through: models.ProductTag,
+    Tag.belongsToMany(models.product, {
+      through: models.product_tag,
       as: 'products',
       foreignKey: 'tagId',
       otherKey: 'productId',
