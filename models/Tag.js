@@ -20,5 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
     modelName: 'tag',
   })
+  Tag.associate = models => {
+    Tag.belongsTo(models.Product, { 
+      foreignKey: 'productId', 
+    });
+  };
 return Tag;
 };
