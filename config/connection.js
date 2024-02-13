@@ -1,15 +1,31 @@
 require('dotenv').config();
-
 const Sequelize = require('sequelize');
+const envConfig = require('./config');
 
-const sequelize = process.env.JAWSDB_URL
-  ? new Sequelize(process.env.JAWSDB_URL)
-  : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-      host: 'localhost',
-      dialect: 'mysql',
-      dialectOptions: {
-        decimalNumbers: true,
-      },
+let sequelize;
+
+if (process.env.NODE_ENV === 'production') {
+    sequelize = new Sequelize(process.env.JAWSDB_URL, {
+        dialect: process.env.DB_DIALECT,
+        dialectOptions: {
+          decimalNumbers: true,
+        }
     });
+} else {
+    const config = envConfig; 
+    sequelize = new Sequelize({
+      database: config.database,
+      username: config.username,
+      password: config.password,
+      host: config.host,
+      dialect: config.dialect,
+    });
+}
+
+sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+}).catch(err => {
+    console.error('Unable to connect to the database:', err);
+});
 
 module.exports = sequelize;
