@@ -3,7 +3,7 @@ const db = require('../../models');
 const Product = db.product;
 const Category = db.category;
 const Tag = db.tag;
-const ProductTag = db.product_Tag;
+const ProductTag = db.product_tag;
 
 // The `/api/products` endpoint
 
