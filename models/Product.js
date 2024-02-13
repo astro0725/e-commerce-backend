@@ -36,6 +36,18 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     underscored: true,
     modelName: 'product',
-  })
+  });
+  Product.associate = models => {
+    Product.belongsTo(models.Category, {
+      foreignKey: 'categoryId',
+      as: 'category',
+    });
+    Product.belongsToMany(models.Tag, {
+      through: models.ProductTag,
+      as: 'tags',
+      foreignKey: 'productId',
+      otherKey: 'tagId',
+    });
+  };
 return Product;
 };

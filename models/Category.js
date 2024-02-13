@@ -19,6 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     underscored: true,
     modelName: 'category',
-  })
+  });
+  Category.associate = models => {
+    Category.hasMany(models.Product, {
+      foreignKey: 'categoryId',
+      as: 'products',
+    });
+  };
 return Category;
 };
