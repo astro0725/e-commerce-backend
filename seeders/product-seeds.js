@@ -1,4 +1,5 @@
-const { Product } = require('../models');
+const db = require('../models');
+const Product = db.product;
 
 const productData = [
   {
