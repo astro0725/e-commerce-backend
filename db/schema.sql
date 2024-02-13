@@ -12,35 +12,39 @@ DROP TABLE IF EXISTS tag;
 
 -- Create category table
 CREATE TABLE category (
-    categoryId INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    PRIMARY KEY (categoryId)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(255) NOT NULL UNIQUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Create product table with a foreign key to category
+-- Create product table
 CREATE TABLE product (
-    productId INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL UNIQUE,
     price DECIMAL(10, 2) NOT NULL,
-    stock INT NOT NULL,
-    categoryId INT,
-    PRIMARY KEY (productId),
-    FOREIGN KEY (categoryId) REFERENCES category(categoryId)
+    stock INT NOT NULL DEFAULT 10,
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES category(id),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Create tag table
 CREATE TABLE tag (
-    tagId INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    PRIMARY KEY (tagId)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tag_name VARCHAR(255) NOT NULL UNIQUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Create product_tag junction table for many-to-many relationship between product and tag
+-- Create product_tag junction table
 CREATE TABLE product_tag (
-    productTagId INT NOT NULL AUTO_INCREMENT,
-    productId INT NOT NULL,
-    tagId INT NOT NULL,
-    PRIMARY KEY (productTagId),
-    FOREIGN KEY (productId) REFERENCES product(productId),
-    FOREIGN KEY (tagId) REFERENCES tag(tagId)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product(id),
+    FOREIGN KEY (tag_id) REFERENCES tag(id),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
