@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   class Category extends sequelize.Sequelize.Model {}
   Category.init({
-      categoryId: {
+      id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
@@ -20,11 +20,5 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
     modelName: 'category',
   })
-  Category.associate = models => {
-    Category.hasMany(models.Product, {
-      foreignKey: 'categoryId',
-      as: 'products',
-    });
-  };
 return Category;
 };
