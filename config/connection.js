@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === 'production') {
       dialectOptions: {
         decimalNumbers: true,
       },
-      logging: true
     });
 } else {
     const config = envConfig; 
@@ -20,7 +19,6 @@ if (process.env.NODE_ENV === 'production') {
       password: config.password,
       host: config.host,
       dialect: config.dialect,
-      logging: true
     });
 }
 
