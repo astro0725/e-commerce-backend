@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       through: models.product_tag,
       as: 'tags',
       foreignKey: 'product_id',
-      otherKey: 'tagId',
+      otherKey: 'tag_id',
     });
   };
 return Product;
